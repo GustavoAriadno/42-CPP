@@ -15,6 +15,7 @@ class PhoneBook {
 
 		Contact		get_one_contact(int wichContact);
 		Contact*	get_all_contacts(void);
+		int			get_index(void);
 };
 
 #endif

@@ -11,3 +11,4 @@ void		PhoneBook::set_contact(Contact &newContact) {
 
 Contact		PhoneBook::get_one_contact(int wichContact) { return this->_contactList[wichContact]; }
 Contact*	PhoneBook::get_all_contacts(void) { return this->_contactList; }
+int			PhoneBook::get_index(void) { return this->_index; }

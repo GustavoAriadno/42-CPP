@@ -3,24 +3,41 @@
 #include "Contact.hpp"
 
 std::string	fill_field(std::string to_fill) {
-	std::string userInput = "";
+	std::string userInput;
 
-	std::cout << "Please, type the " << to_fill << ": ";
+	std::cout << "Please, type the " << to_fill << ": " << std::endl;
 
+getInput:
 	std::getline(std::cin, userInput);
 
-	if (userInput.length() == 0) return fill_field(to_fill);
+	if (std::cin.eof()) return "";
+	if (userInput.length() == 0) goto getInput;
 	return userInput;
 }
 
 void		add_contact(PhoneBook &phone_book) {
 	Contact		contact;
+	std::string	buffer;
 
-	contact.set_first_name(fill_field("first name"));
-	contact.set_last_name(fill_field("last name"));
-	contact.set_nickname(fill_field("nickname"));
-	contact.set_phone_number(fill_field("phone number"));
-	contact.set_darkest_secret(fill_field("darkest secret"));
+	buffer = fill_field("first name");
+	if (buffer == "") return ;
+	contact.set_first_name(buffer);
+
+	buffer = fill_field("last name");
+	if (buffer == "") return ;
+	contact.set_last_name(buffer);
+
+	buffer = fill_field("nickname");
+	if (buffer == "") return ;
+	contact.set_nickname(buffer);
+
+	buffer = fill_field("phone number");
+	if (buffer == "") return ;
+	contact.set_phone_number(buffer);
+
+	buffer = fill_field("darkest secret");
+	if (buffer == "") return ;
+	contact.set_darkest_secret(buffer);
 
 	phone_book.set_contact(contact);
 }
@@ -35,9 +52,10 @@ int			get_input(void)
 	std::cout << "EXIT: exit the program" << std::endl;
 
 	std::cin >> userInput;
-	if (userInput.compare("ADD") == 0) return 1;
-	if (userInput.compare("SEARCH") == 0) return 2;
-	if (userInput.compare("EXIT") == 0) return 0;
+	if (userInput == "ADD") return 1;
+	if (userInput == "SEARCH") return 2;
+	if (userInput == "EXIT") return 0;
+	if (userInput == "") return 0;
 	return -1;
 }
 
@@ -61,18 +79,26 @@ int			get_index(int err=0) {
 
 	if (err) std::cout << "Wrong input! Try again..." << std::endl;
 
-	std::cout << "Type the index of the contact:" << std::endl;
+	std::cout << "Type the index of the contact:";
 	std::cin >> userInput;
 
-	if (userInput.length() != 1) return get_index(1);
-	if (userInput[0] < '0' || userInput[0] > '9') return get_index(1);
+	if (userInput == "") return -1;
+	if (userInput.length() != 1 || userInput[0] < '0' || userInput[0] > '8') return get_index(1);
 	return userInput[0] - '0';
 }
 
 void		search(PhoneBook &phone_book) {
 	Contact		contact;
+	int			index;
 
-	std::cout << "|index     |first name|last  name|nick  name|" << std::endl;
+	contact = phone_book.get_one_contact(0);
+	if (contact.get_first_name() == "") {
+		std::cout << "There are no contacts" << std::endl
+			<< "Please, use ADD command" << std::endl << std::endl;
+		return ;
+	}
+
+	std::cout << "|     index|first name| last name| nick name|" << std::endl;
 
 	for (int i = 0; i < 8; i++) {
 		contact = phone_book.get_one_contact(i);
@@ -85,14 +111,21 @@ void		search(PhoneBook &phone_book) {
 		print(contact.get_nickname());
 		std::cout << std::endl;
 	}
-	contact = phone_book.get_one_contact(get_index());
+	index = get_index();
+	if (index == -1) return ;
+
+	contact = phone_book.get_one_contact(index);
+	if (contact.get_first_name() == "") {
+		std::cout << "This contact doesn't exist" << std::endl << std::endl;
+		return ;
+	}
+
 	std::cout << contact.get_first_name() << std::endl;
 	std::cout << contact.get_last_name() << std::endl;
 	std::cout << contact.get_nickname() << std::endl;
 	std::cout << contact.get_phone_number() << std::endl;
 	std::cout << contact.get_darkest_secret() << std::endl;
 }
-
 
 int			main(void)
 {
