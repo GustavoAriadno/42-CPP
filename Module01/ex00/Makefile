@@ -1,6 +1,6 @@
 NAME	=	ZombieInvasion
 
-CC		=	c++
+CC		=	g++
 CCFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 all		:	$(NAME)

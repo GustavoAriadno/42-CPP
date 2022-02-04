@@ -2,9 +2,11 @@
 
 int main( void ) {
 	Zombie *firstZb = new Zombie("Corongers20");
+	firstZb->announce();
 
 	Zombie *secondZb = firstZb->newZombie("Lil Child");
-
-	*secondZb->randomChump("The first to die");
+	secondZb->announce();
+	
+	secondZb->randomChump("333");
 	return (0);
 }
