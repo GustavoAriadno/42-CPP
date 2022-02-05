@@ -8,5 +8,8 @@ int main( void ) {
 	secondZb->announce();
 	
 	secondZb->randomChump("333");
+
+	delete secondZb;
+	delete firstZb;
 	return (0);
 }
