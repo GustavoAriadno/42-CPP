@@ -15,30 +15,21 @@ std::string	getFileText(std::ifstream &myfile)
 
 std::string	replace(std::string toReplace, std::string s1, std::string s2, int i)
 {
-	std::string	replacedContent = "";
-	int			s1Len = 0;
-	int			toReplaceLen = 0;
+	std::string	replacedPart = toReplace;
+	std::string	rest = "";
 
-	s1Len = s1.length();
-	toReplaceLen = toReplace.length();
-	replacedContent =
-		toReplace.substr(0, i) +
-		s2 +
-		toReplace.substr(i + s1Len, toReplaceLen - s1Len);
-	return replacedContent;
-}
+	i = replacedPart.find(s1);
+	if (i != -1) {
+		int	s1Len = s1.length();
+		int	restLen = toReplace.length();
 
-std::string	getReplacedContent(std::string fileContent, std::string s1, std::string s2)
-{
-	std::string	replacedContent = fileContent;
-	int			i = 0;
-
-	i = replacedContent.find(s1);
-	while (i != -1) {
-		replacedContent = replace(replacedContent, s1, s2, i);
-		i = replacedContent.find(s1);
+		replacedPart = toReplace.substr(0, i) + s2;
+		rest = toReplace.substr(i + s1Len, restLen - s1Len);
+		i = rest.find(s1);
 	}
-	return replacedContent;
+	return (i == -1)
+		? replacedPart + rest
+		: replacedPart + replace(rest, s1, s2, i);
 }
 
 int	main(int argc, char **argv)
@@ -50,26 +41,26 @@ int	main(int argc, char **argv)
 			"./sed <fileName> <strToReplace> <strReplacer>" << std::endl;
 		return 1;
 	}
-	std::string str1 = argv[2], str2 = argv[3];
-	if (str1 == str2) {
-		std::cout << "Are you serious? 🤦" << std::endl;
-		return 1;
-	}
-
-	std::string		fileContent;
-	std::string		newFileName = argv[1];
-
+	std::string
+		fileContent,
+		fileName = argv[1],
+		str1 = argv[2],
+		str2 = argv[3];
 	std::ifstream	myFile(argv[1]);
+
 	if (myFile.fail()) {
-		std::cout << "File doesn't exist" << std::endl;
+		std::cout << "File " << fileName << " doesn't exist" << std::endl;
 		return 1;
 	}
+
+	if (str1 == str2) { std::cout << "Are you serious? 🤦" << std::endl; }
+
 	fileContent = getFileText(myFile);
 	myFile.close();
 
 
-	std::ofstream	newFile((newFileName + ".replace").c_str());
-	newFile << getReplacedContent(fileContent, str1, str2);
+	std::ofstream	newFile((fileName + ".replace").c_str());
+	newFile << replace(fileContent, str1, str2, 0);
 	newFile.close();
 	return 0;
 }
