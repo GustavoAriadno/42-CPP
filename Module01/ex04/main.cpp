@@ -43,11 +43,16 @@ std::string	getReplacedContent(std::string fileContent, std::string s1, std::str
 
 int	main(int argc, char **argv)
 {
-	if (argc < 4 || argc > 4) {
+	if (argc != 4) {
 		std::cout <<
-			"WRONG INPUT YOU IDIOT!!!" << std::endl <<
+			"WRONG INPUT YOU IDIOT!!! 😡" << std::endl <<
 			"Execute the program as the following:" << std::endl <<
-			"./<exe> <fileName> <strToReplace> <strReplacer>" << std::endl;
+			"./sed <fileName> <strToReplace> <strReplacer>" << std::endl;
+		return 1;
+	}
+	std::string str1 = argv[2], str2 = argv[3];
+	if (str1 == str2) {
+		std::cout << "Are you serious? 🤦" << std::endl;
 		return 1;
 	}
 
@@ -64,7 +69,7 @@ int	main(int argc, char **argv)
 
 
 	std::ofstream	newFile((newFileName + ".replace").c_str());
-	newFile << getReplacedContent(fileContent, argv[2], argv[3]);
+	newFile << getReplacedContent(fileContent, str1, str2);
 	newFile.close();
 	return 0;
 }
