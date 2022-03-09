@@ -3,7 +3,7 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(void) {
-	FragTrap::name = "Scavinho";
+	FragTrap::name = "Fraginho";
 	FragTrap::hp = 100;
 	FragTrap::energyPoints = 100;
 	FragTrap::attackDamage = 30;
@@ -30,6 +30,19 @@ FragTrap &FragTrap::operator=(FragTrap const &rhs) {
 	this->energyPoints = rhs.energyPoints;
 	this->attackDamage = rhs.attackDamage;
 	return (*this);
+}
+
+void FragTrap::attack(const std::string &target) {
+	if (FragTrap::hp > 0 && FragTrap::energyPoints > 0) {
+		std::cout
+			<< "FragTrap: " << FragTrap::name
+			<< " attacks " << target
+			<< ", causing " << FragTrap::attackDamage
+			<< " points of damage!"
+		<< std::endl;
+
+		FragTrap::energyPoints--;
+	}
 }
 
 void FragTrap::highFivesGuys(void)

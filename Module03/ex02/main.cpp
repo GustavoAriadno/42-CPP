@@ -1,21 +1,55 @@
-/* Copyright (c) 2022 Caio Souza, Gustavo Ariadno. All rights reserved. */
-/* 42 */
-
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 #include <iostream>
+
+void fragTrap(void) {
+	{
+		FragTrap fragtrap("gustav");
+
+		for (unsigned int i = 0; i < 105; i++) {
+			std::cout << i << " = ";
+			fragtrap.attack("cai");
+			if (i >= 100) std::cout << std::endl;
+		}
+	}
+	std::cout << "______________________________" << std::endl;
+	{
+		FragTrap fragtrap("gustav");
+
+		fragtrap.takeDamage(99);
+		fragtrap.beRepaired(1);
+		fragtrap.takeDamage(99);
+		fragtrap.beRepaired(1);
+	}
+	std::cout << "______________________________" << std::endl;
+	{
+		FragTrap fragtrap("gustav");
+
+		for (unsigned int i = 0; i < 50; i++) {
+			fragtrap.beRepaired(1);
+		}
+		fragtrap.attack("cai");
+	}
+	std::cout << "______________________________" << std::endl;
+	{
+		FragTrap fragtrap("lenz");
+
+		fragtrap.highFivesGuys();
+	}
+}
 
 void scavTrap(void) {
 	{
 		ScavTrap scavtrap("gustav");
 
 		for (unsigned int i = 0; i < 100; i++) {
-			std::cout << i << std::endl;
+			std::cout << i << " = ";
 			scavtrap.attack("cai");
 		}
 	}
-	std::cout << "---------------" << std::endl;
+	std::cout << "______________________________" << std::endl;
 	{
 		ScavTrap scavtrap("gustav");
 
@@ -24,7 +58,7 @@ void scavTrap(void) {
 		scavtrap.takeDamage(99);
 		scavtrap.beRepaired(1);
 	}
-	std::cout << "---------------" << std::endl;
+	std::cout << "______________________________" << std::endl;
 	{
 		ScavTrap scavtrap("gustav");
 
@@ -33,7 +67,7 @@ void scavTrap(void) {
 		}
 		scavtrap.attack("cai");
 	}
-	std::cout << "---------------" << std::endl;
+	std::cout << "______________________________" << std::endl;
 	{
 		ScavTrap scavtrap("lenz");
 
@@ -49,7 +83,7 @@ void clapTrap(void) {
 			claptrap.attack("cai");
 		}
 	}
-	std::cout << "---------------" << std::endl;
+	std::cout << "______________________________" << std::endl;
 	{
 		ClapTrap claptrap("gustav");
 
@@ -58,7 +92,7 @@ void clapTrap(void) {
 		claptrap.takeDamage(9);
 		claptrap.beRepaired(1);
 	}
-	std::cout << "---------------" << std::endl;
+	std::cout << "______________________________" << std::endl;
 	{
 		ClapTrap claptrap("gustav");
 
@@ -71,6 +105,7 @@ void clapTrap(void) {
 
 int main(void) {
 	//clapTrap();
-	scavTrap();
+	// scavTrap();
+	fragTrap();
 	return (0);
 }

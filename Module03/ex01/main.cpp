@@ -11,8 +11,10 @@ void scavTrap(void) {
 		ScavTrap scavtrap("gustav");
 
 		for (unsigned int i = 0; i < 100; i++) {
-			std::cout << i << std::endl;
+			std::cout << i << " = ";
 			scavtrap.attack("cai");
+			
+			if (i >= 50) std::cout << std::endl;
 		}
 	}
 	std::cout << "---------------" << std::endl;
