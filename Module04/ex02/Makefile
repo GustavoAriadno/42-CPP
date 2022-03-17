@@ -1,0 +1,16 @@
+NAME	=	abstract
+
+CC		=	g++
+CCFLAGS	=	-Wall -Wextra -Werror -std=c++98
+
+all		:	$(NAME)
+
+$(NAME)	:	main.cpp AAnimal.cpp Dog.cpp Cat.cpp Brain.cpp
+			$(CC) $(CCFLAGS) -o $@ $^ -fsanitize=address
+
+clean	:
+			rm -rf $(NAME)
+
+re		:	clean all
+
+.PHONY	:	all clean re
