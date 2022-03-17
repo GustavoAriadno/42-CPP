@@ -1,8 +1,6 @@
 /* Copyright (c) 2022 Caio Souza, Gustavo Ariadno. All rights reserved. */
 /* 42 */
 
-#include <iostream>
-
 #include "Animal.hpp"
 #include "Dog.hpp"
 
@@ -18,14 +16,16 @@ Dog::~Dog() {
 }
 
 Dog &Dog::operator=(Dog const &rhs) {
-	delete Dog::brain;
-	Dog::brain = new Brain(*(rhs.getBrain()));
-	Dog::brain = rhs.brain;
+	Dog::type = "Dog";
+	*(Dog::brain) = *(rhs.getBrain());
 	return (*this);
 }
 
 Brain	*Dog::getBrain() const { return Dog::brain; }
 
-Dog::Dog(Dog const &src): Animal(src) { *this = src; }
+Dog::Dog(Dog const &src): Animal(src) {
+	Dog::brain = new Brain();
+	*this = src;
+}
 
 void Dog::makeSound(void) const { std::cout << "Dog sound: Bark bark... Bark!" << std::endl; }
