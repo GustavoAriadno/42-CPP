@@ -7,7 +7,7 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-int brains(void) {
+void	brains(void) {
 	{
 		const Animal* j = new Dog();
 		const Animal* i = new Cat();
@@ -39,10 +39,35 @@ int brains(void) {
 		
 		delete [] animals;
 	}
-	return 0;
+
+	std::cout << std::endl;
 }
 
-int main(void) {
+void	deep_or_shallow(void) {
+	Cat* Cat1 = new Cat();
+	std::cout << std::endl;
+
+	Cat1->getBrain()->setOneIdea(0, "Derruba as parada");
+	std::cout << "Ideia 1 = " << Cat1->getBrain()->getOneIdea(0) << "\n";
+
+
+	Cat* Cat2 = new Cat(*Cat1);
+
+	std::cout << "Ideia 2 = " << Cat2->getBrain()->getOneIdea(0) << "\n";
+	Cat2->getBrain()->setOneIdea(0, "Ser um bom gatinho");
+	std::cout << std::endl;
+
+
+	std::cout
+		<< "Ideia final 1 = " << Cat1->getBrain()->getOneIdea(0) << std::endl
+		<< "Ideia final 2 = " << Cat2->getBrain()->getOneIdea(0) << std::endl;
+
+	delete Cat1;
+	delete Cat2;
+}
+
+int		main(void) {
 	brains();
+	deep_or_shallow();
 	return (0);
 }

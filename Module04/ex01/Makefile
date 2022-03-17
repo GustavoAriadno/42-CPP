@@ -6,7 +6,7 @@ CCFLAGS	=	-Wall -Wextra -Werror -std=c++98
 all		:	$(NAME)
 
 $(NAME)	:	main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
-			$(CC) $(CCFLAGS) -o $@ $^
+			$(CC) $(CCFLAGS) -o $@ $^ -fsanitize=address
 
 clean	:
 			rm -rf $(NAME)

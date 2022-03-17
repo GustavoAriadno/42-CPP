@@ -16,10 +16,16 @@ Cat::~Cat() {
 }
 
 Cat &Cat::operator=(Cat const &rhs) {
-	Cat::brain = rhs.brain;
+	Cat::type = "Cat";
+	*(Cat::brain) = *(rhs.getBrain());
 	return (*this);
 }
 
-Cat::Cat(Cat const &src): Animal(src) { *this = src; }
+Brain	*Cat::getBrain() const { return Cat::brain; }
+
+Cat::Cat(Cat const &src): Animal(src) { 
+	Cat::brain = new Brain();
+	*this = src;
+}
 
 void Cat::makeSound(void) const { std::cout << "Cat sound: Meow Meow... Meow!" << std::endl; }

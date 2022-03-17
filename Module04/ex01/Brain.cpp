@@ -15,3 +15,13 @@ Brain &Brain::operator=(Brain const &rhs) {
 }
 
 Brain::Brain(Brain const &src) { *this = src; }
+
+void	Brain::setOneIdea(int i, std::string idea) {
+	if (i < 0 || i > 100) return;
+	Brain::ideas[i] = idea;
+}
+
+std::string	Brain::getOneIdea(int i) {
+	if (i < 0 || i > 100) return "";
+	return (Brain::ideas[i]);
+}

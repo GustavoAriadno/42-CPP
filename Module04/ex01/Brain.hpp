@@ -12,6 +12,8 @@ class Brain {
 		virtual ~Brain(void);
 		Brain &operator=(Brain const &rhs);
 		Brain(Brain const &src);
+		std::string	getOneIdea(int i);
+		void	setOneIdea(int i, std::string idea);
 	protected:
 	private:
 		std::string ideas[100];

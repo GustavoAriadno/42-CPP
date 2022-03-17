@@ -18,9 +18,13 @@ Dog::~Dog() {
 }
 
 Dog &Dog::operator=(Dog const &rhs) {
+	delete Dog::brain;
+	Dog::brain = new Brain(*(rhs.getBrain()));
 	Dog::brain = rhs.brain;
 	return (*this);
 }
+
+Brain	*Dog::getBrain() const { return Dog::brain; }
 
 Dog::Dog(Dog const &src): Animal(src) { *this = src; }
 
