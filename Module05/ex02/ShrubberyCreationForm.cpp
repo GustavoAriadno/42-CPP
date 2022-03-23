@@ -8,16 +8,15 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string _target)
 	: Form("ShrubberyCreation", 145, 137)
 	{ this->target = _target; }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &b)
-	: Form("ShrubberyCreation", 145, 137) {
-		this->target = b.target; 
-		this->setIsSigned(b.getIsSigned());
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src)
+	: Form("ShrubberyCreation", 145, 137)
+	{ *this = src; }
 
 ShrubberyCreationForm::~ShrubberyCreationForm () {}
 
-ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &b) {
-	this->setIsSigned(b.getIsSigned());
+ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
+	this->target = rhs.target;
+	this->setIsSigned(rhs.getIsSigned());
 	return *this;
 }
 
@@ -34,9 +33,7 @@ void					ShrubberyCreationForm::executeConcrete(void) const {
 	   `&%\\ ` /%&'    |.|        \\ '|8'\n\
 	       |o|        | |         | |\n\
 	       |.|        | |         | |\n\
-	jgs \\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
-}
+	jgs  \\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
 
-// bool		ShrubberyCreationForm::getIsFormSigned() const {
-// 	return Form::getIsSigned();
-// }
+	newFile.close();
+}

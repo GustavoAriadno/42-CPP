@@ -1,4 +1,4 @@
-NAME	=	formu
+NAME	=	execution
 
 CC		=	g++
 CCFLAGS	=	-Wall -Wextra -Werror -std=c++98
@@ -6,7 +6,7 @@ CCFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 all		:	$(NAME)
 
-$(NAME)	:	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp
+$(NAME)	:	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 			$(CC) $(CCFLAGS) -o $@ $^
 
 clean	:

@@ -50,19 +50,22 @@ void				Form::beSigned(Bureaucrat b) {
 }
 
 void				Form::execute(Bureaucrat const &executor) const {
+	if (this->getIsSigned() != true)
+		throw Form::FormIsNotSignedException();
 	if (this->getRequiredToSign() < executor.getGrade() || this->getRequiredToExec() < executor.getGrade())
 		throw Form::GradeTooLowException();
 	this->executeConcrete();
 }
 
-const char			*Form::GradeTooHighException::what() const throw() { return "Grade too high!!!"; }
-const char			*Form::GradeTooLowException::what() const throw() { return "Grade too low!!!"; }
+const char			*Form::GradeTooHighException::what() const throw() { return "Grade too high!"; }
+const char			*Form::GradeTooLowException::what() const throw() { return "Grade too low!"; }
+const char			*Form::FormIsNotSignedException::what() const throw() { return "Form is not signed!"; }
 
 std::ostream		&operator<<(std::ostream &stream, Form const &rhs) {
 	std::cout
 		<< rhs.getName() << ", is "
-		<< ((rhs.getIsSigned()) ? "" : "not ") << "signed;\n"
-		<< "Requires " << rhs.getRequiredToSign() << " to sign;\n"
+		<< (rhs.getIsSigned() ? "" : "not ") << "signed; "
+		<< "Requires " << rhs.getRequiredToSign() << " to sign; "
 		<< "Requires " << rhs.getRequiredToExec() << " to execute.\n";
 	return stream;
 }

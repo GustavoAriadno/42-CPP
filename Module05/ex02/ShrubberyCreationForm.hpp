@@ -3,16 +3,15 @@
 
 #include <iostream>
 #include <fstream>
-#include <exception>
 #include "Form.hpp"
 
 class ShrubberyCreationForm : public Form {
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string _target);
-		ShrubberyCreationForm(const ShrubberyCreationForm &f);
+		ShrubberyCreationForm(const ShrubberyCreationForm &src);
 		virtual ~ShrubberyCreationForm();
-		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &f);
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
 
 		void		executeConcrete(void) const;
 	private:

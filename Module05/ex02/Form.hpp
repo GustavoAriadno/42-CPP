@@ -34,6 +34,8 @@ class Form {
 			{ virtual const char *what() const throw(); };
 		class GradeTooLowException : public std::exception
 			{ virtual const char *what() const throw(); };
+		class FormIsNotSignedException : public std::exception
+			{ virtual const char *what() const throw(); };
 };
 
 std::ostream &operator<<(std::ostream &stream, Form const &rhs);
