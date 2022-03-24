@@ -1,15 +1,15 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm()
-	: Form("ShrubberyCreation", 25, 5)
+	: Form("PresidentialPardon", 25, 5)
 	{ this->target = "PADRON"; }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string _target)
-	: Form("ShrubberyCreation", 25, 5)
+	: Form("PresidentialPardon", 25, 5)
 	{ this->target = _target; }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src)
-	: Form("ShrubberyCreation", 25, 5)
+	: Form("PresidentialPardon", 25, 5)
 	{ *this = src; }
 
 PresidentialPardonForm::~PresidentialPardonForm () {}

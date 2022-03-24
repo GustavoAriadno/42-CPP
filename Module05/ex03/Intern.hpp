@@ -20,6 +20,10 @@ class Intern {
 	private:
 		std::string	target;
 
+		Form	*scf(std::string target);
+		Form	*rrf(std::string target);
+		Form	*ppf(std::string target);
+
 		class FormNotFindException : public std::exception
 			{ virtual const char *what() const throw(); };
 };
