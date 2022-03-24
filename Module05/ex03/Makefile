@@ -6,7 +6,7 @@ CCFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 all		:	$(NAME)
 
-$(NAME)	:	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Inter.cpp
+$(NAME)	:	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 			$(CC) $(CCFLAGS) -o $@ $^
 
 clean	:
