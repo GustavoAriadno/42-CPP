@@ -1,15 +1,15 @@
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm()
-	: Form("ShrubberyCreation", 72, 45)
+	: Form("RobotomyRequest", 72, 45)
 	{ this->target = "PADRON"; }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string _target)
-	: Form("ShrubberyCreation", 72, 45)
+	: Form("RobotomyRequest", 72, 45)
 	{ this->target = _target; }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src)
-	: Form("ShrubberyCreation", 72, 45)
+	: Form("RobotomyRequest", 72, 45)
 	{ *this = src; }
 
 RobotomyRequestForm::~RobotomyRequestForm () {}
