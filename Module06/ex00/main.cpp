@@ -6,18 +6,28 @@
 #include <limits>
 #include <cmath>
 
+#include <cctype>
 
 void	printChar(std::string arg) {
 	std::string	pValue = "Non displayable";
 
-	if (arg.size() > 0 && arg.size() < 4) {
+	if (arg.size() == 1 && !isdigit(arg[0])) {
+		if (31 < arg[0] && arg[0] < 127) {
+			pValue = "'";
+			pValue += arg[0];
+			pValue += "'";
+		}
+	}
+	else if (arg.size() > 1 && !isdigit(arg[0]))
+		pValue = "impossible";
+	else if (arg.size() > 0) {
 		std::stringstream	ss;
-		char				c;
+		int					c;
 
 		ss << arg;
 		ss >> c;
-		
-		if (20 < c && c < 127) {
+
+		if (31 < c && c < 127) {
 			pValue = "'";
 			pValue += c;
 			pValue += "'";
@@ -44,12 +54,37 @@ void	printInt(std::string arg) {
 	std::cout << "int: " << pValue << std::endl;
 }
 
-//
-//
-//
-//			DAR O MESMO QUE RECEBER
-//			ARG.COMPARE(PVALUE);
-//
+void	printFloat(std::string arg) {
+	std::string	pValue = "nan";
+	double		num = atof(arg.c_str()),
+				intPart = 1,
+				fractPart = 1;
+
+	std::stringstream	ss;
+	ss << num;
+	ss >> pValue;
+
+	if (num == 0 && arg[0] != '0') {
+		num = atof("nan");
+		pValue = "nan";
+	}
+
+	if (pValue == "nan" || num == atof("inF") || num == atof("-inF"))
+		pValue += "f";
+
+	if (pValue != "nanf" && num != atof("inF") && num != atof("-inF")) {
+		fractPart = modf(num, &intPart);
+
+		pValue += (fractPart == 0) ? ".0f" : "f";
+	}
+
+	if (num == std::numeric_limits<float>::infinity())
+		pValue = "+" + pValue;
+
+	std::cout
+		<< "float: " << pValue
+		<< std::endl;
+}
 
 void	printDouble(std::string arg) {
 	std::string	pValue = "nan";
@@ -73,14 +108,13 @@ void	printDouble(std::string arg) {
 		<< std::endl;
 }
 
-
 int	main(int argc, char *argv[]) {
 	if (argc != 2) {
 		std::cerr << "The program need one argument!" << std::endl;
 	} else {
 		printChar(argv[1]);
 		printInt(argv[1]);
-		// printFloat(argv[1]);
+		printFloat(argv[1]);
 		printDouble(argv[1]);
 	}
 	return 0;
