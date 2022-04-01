@@ -10,15 +10,17 @@
 void	printChar(std::string arg) {
 	std::string	pValue = "Non displayable";
 
-	if (arg.size() == 1 && !isdigit(arg[0]) && isprint(arg[0])) {
+	if (arg.size() == 1 && !isdigit(arg[0]) && isprint(arg[0]))
 		pValue = "'" + arg + "'";
-	}
 	else if (arg.size() > 1 && !isdigit(arg[0]))
 		pValue = "impossible";
 	else if (arg.size() > 0) {
-		char c = static_cast<char>(std::atoi(arg.c_str()));
+		int		num = std::atoi(arg.c_str());
+		char	c = static_cast<char>(num);
 
-		if (isprint(c)) {
+		if (num > 127 || arg.size() > 3)
+			pValue = "impossible";
+		else if (isprint(c)) {
 			pValue = "'";
 			pValue += c;
 			pValue += "'";
