@@ -31,7 +31,7 @@ void	Span::addNumber( std::vector<int>::iterator begin, std::vector<int>::iterat
 	for ( std::vector<int>::iterator tmp = begin; tmp != end; ++tmp )
 		len++;
 
-	if (this->numbers.size() + --len == max_nums) throw Span::MaxElementsStoredException();
+	if (this->numbers.size() + --len >= max_nums) throw Span::MaxElementsStoredException();
 
 	this->numbers.insert( this->numbers.end(), begin, end );
 }

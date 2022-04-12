@@ -21,8 +21,23 @@ int main( void ) {
 		span.addNumber(v.begin(), v.end());
 
 		std::cout << span;
-		// span.longestSpan();
-		// span.shortestSpan();
+		std::cout << span.longestSpan() << std::endl;
+		std::cout << span.shortestSpan() << std::endl;
+
+		try {
+			Span	errrr(2);
+			for (int i = 0; i < 10; i++) { errrr.addNumber(n[i]); }
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
+		try {
+			Span	errrr(2);
+			errrr.addNumber(v.begin(), v.end());
+		}
+		catch (std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
 	}
 	std::cout << std::endl;
 	return 0;
